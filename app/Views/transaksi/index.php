@@ -16,7 +16,7 @@
             <tr>
               <th>ID</th>
               <th>Murid</th>
-              <th>Nominal</th>
+              <!-- <th>Nominal</th> -->
               <th>Payment Type</th>
               <th>Periode Pembayaran</th>
               <th>Tanggal Transaksi</th>
@@ -47,9 +47,9 @@
       columns: [
         { data: 'transaksi_id' },
         { data: 'anak_nama' },
-        { data: 'transaksi_nominal',
-          render: $.fn.dataTable.render.number(',', '.', 0, 'Rp ') 
-        },
+        // { data: 'transaksi_nominal',
+        //   render: $.fn.dataTable.render.number(',', '.', 0, 'Rp ') 
+        // },
         {
             data: 'payment_type'
         },
