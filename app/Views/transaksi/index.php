@@ -28,6 +28,10 @@
     </div>
 </div>
 
+<script>
+    const userRole = <?= session()->get('role') ?? 3; ?>; // Default to 3 if not logged in
+</script>
+
  <script>
   $(document).ready(function() {
     $('#usersTable').DataTable({
@@ -80,25 +84,32 @@
         if (data == 1) {
             return '<span class="badge bg-success">Verified</span>';
         } else {
-            return '<span class="badge bg-danger">Not Verified</span>';
+            return '<span class="badge bg-danger">Waiting Verification</span>';
         }
     },
     // This makes sure DataTables knows what type of data it's sorting.
     // In this case, it's a number.
     type: 'num',
 },
-        {
+       {
     data: null,
     orderable: false,
     render: function(data, type, row) {
-        // Check the 'verifikasi' status from the row data
+        // Check the 'verifikasi' status for the invoice button
         const invoiceButton = row.verifikasi == 1 ?
             `<a class="btn btn-success btn-sm" href="<?= base_url('transaksi/invoice/') ?>${row.transaksi_id}">Invoice</a>` :
-            `<a class="btn btn-secondary btn-sm disabled" href="#">Invoice</a>`;
+            `<a class="btn btn-secondary btn-sm disabled" href="#" aria-disabled="true">Invoice</a>`;
+
+        // Conditionally show the verification button based on the user's role
+        let verificationButton = '';
+        if (userRole < 3) {
+            verificationButton = `<a class="btn btn-primary btn-sm" href="<?= base_url('transaksi/detail/') ?>${row.transaksi_id}">Verification</a>`;
+        }
 
         return `
             ${invoiceButton}
-            <a class="btn btn-primary btn-sm" href="<?= base_url('transaksi/detail/') ?>${row.transaksi_id}">Verification</a>`;
+            ${verificationButton}
+        `;
     }
 },
         {
@@ -125,5 +136,7 @@
     });
   });
 </script>
+
+
 
 <?php echo view('footer'); ?>

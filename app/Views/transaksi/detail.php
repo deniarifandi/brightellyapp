@@ -54,7 +54,7 @@
                             <?php if ($transaksi['verifikasi'] == 1): ?>
                                 <span class="badge bg-success">Verified</span>
                             <?php else: ?>
-                                <span class="badge bg-danger">Not Verified</span>
+                                <span class="badge bg-danger">Waiting Verification</span>
                             <?php endif; ?>
                         </span>
                     </li>

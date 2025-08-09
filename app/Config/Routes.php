@@ -5,6 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+
+$routes->group('', ['filter' => 'auth'], function($routes) {
 $routes->get('/', 'Home::index');
 
 //VA OWNER START
@@ -47,4 +49,10 @@ $routes->get('whatsapp','whatsapp::send');
 
 //Tagihan Start
 $routes->get('tagihan/(:any)', 'Potensi::tagihan/$1');
-$routes->post('potensi/datatagihan/(:any)', 'Potensi::datatagihan/$1');
+$routes->post('potensi/datatagihan/(:any)', 'Potensi::datatagihan/$1', ['filter' => 'auth']);
+});
+
+$routes->get('login', 'Home::login');
+$routes->post('login/auth', 'Home::auth');
+$routes->get('logout', 'Home::logout');
+//$routes->get('dashboard', 'Dashboard::index', ['filter' => 'auth']);

@@ -253,6 +253,7 @@ class Transaksi extends BaseController
         $builder->join('identitasanak','identitasanak.anak_id = transaksi.anak_id');
         $builder->where('DATE(transaksi_tanggal) >=', $date_begin);
         $builder->where('DATE(transaksi_tanggal) <=', $date_end);
+        $builder->where('transaksi.deleted_at',null);
         $builder->orderBy('transaksi_tanggal', 'DESC');
 
         $query = $builder->get();
